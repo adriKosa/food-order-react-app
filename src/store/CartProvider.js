@@ -26,8 +26,30 @@ const cartReducer = (state, action) => {
         totalAmount: updatedTotalAmount
       }
     }
-    case "REMOVE_ITEM": break
-    default: break
+    
+    case "REMOVE_ITEM": {
+      const cartItemIndex = state.items.findIndex(item => item.id === action.id)
+      const amountOfItems = state.items[cartItemIndex].amount - 1
+      let updatedItems
+      updatedItems = [...state.items]
+      const updatedTotalAmount = state.totalAmount - updatedItems[cartItemIndex].price
+
+
+      if (amountOfItems < 1) {
+        updatedItems.splice(cartItemIndex, 1)
+      } else {
+        updatedItems[cartItemIndex].amount = amountOfItems
+      }
+
+      return {
+        items: updatedItems,
+        totalAmount: updatedTotalAmount
+      }
+    }
+
+    default: {
+      return defaultCartState
+    }
   }
 }
 
