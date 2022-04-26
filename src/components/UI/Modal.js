@@ -1,6 +1,8 @@
 import classes from './Modal.module.css'
-import { Fragment } from 'react'
+import R from 'react'
 import reactDom from 'react-dom'
+
+const Fragment = R.Fragment
 
 function Backdrop(props) {
   return <div className={classes.backdrop} onClick={props.onCloseCart}></div>

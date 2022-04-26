@@ -1,5 +1,7 @@
-import { useReducer } from 'react'
+import R from 'react'
 import CartContext from './cart-context'
+
+const useReducer = R.useReducer
 
 const defaultCartState = {
   items: [],

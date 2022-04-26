@@ -1,6 +1,9 @@
-import { useRef, useState } from 'react'
+import R from 'react'
 import classes from './MealItemForm.module.css'
 import Input from '../../UI/Input'
+
+const useRef = R.useRef
+const useState = R.useState
 
 function MealItemForm(props) {
   const [amountIsValid, setAmountIsValid] = useState(true)

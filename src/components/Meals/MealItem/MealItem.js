@@ -1,7 +1,9 @@
-import { useContext } from 'react'
+import R from 'react'
 import CartContext from '../../../store/cart-context'
 import classes from "./MealItem.module.css"
 import MealItemForm from "./MealItemForm"
+
+const useContext = R.useContext
 
 function MealItem(props) {
   const cartCtx = useContext(CartContext)

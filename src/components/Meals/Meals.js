@@ -1,6 +1,8 @@
 import MealsSummary from "./MealsSummary"
 import AvailableMeals from "./AvailableMeals"
-import { Fragment } from "react/cjs/react.development"
+import R from "react"
+
+const Fragment = R.Fragment
 
 function Meals() {
   return (

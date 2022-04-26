@@ -1,8 +1,10 @@
 import Header from "./components/Layout/Header";
-import { useState } from "react";
+import R from "react";
 import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
+
+const useState = R.useState
 
 function App() {
   const [showCart, setShowCartState] = useState(false)

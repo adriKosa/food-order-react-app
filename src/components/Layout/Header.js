@@ -1,8 +1,9 @@
-import { Fragment } from "react"
+import R from "react"
 import HeaderCartButton from "./HeaderCartButton"
-
 import mealsImg from '../../assets/meals.jpg'
 import classes from './Header.module.css'
+
+const Fragment = R.Fragment
 
 function Header(props) {
   return (

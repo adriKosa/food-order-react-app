@@ -1,7 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
+import R from 'react'
 import CartContext from '../../store/cart-context'
 import CartIcon from "../Cart/CartIcon"
 import classes from "./HeaderCartButton.module.css"
+
+const useContext = R.useContext
+const useEffect = R.useEffect
+const useState = R.useState
 
 function HeaderCartButton(props) {
   const [btnIsHighlighted, setBtnIsHighlighted] = useState(false)
