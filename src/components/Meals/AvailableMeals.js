@@ -1,36 +1,40 @@
 import classes from "./AvailableMeals.module.css"
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
+import { useEffect, useState } from "react"
+import { Ring } from 'react-awesome-spinners'
 
-const DUMMY_MEALS = [
-  {
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-  },
-  {
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german specialty!',
-    price: 16.5,
-  },
-  {
-    id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
-    price: 12.99,
-  },
-  {
-    id: 'm4',
-    name: 'Green Bowl',
-    description: 'Healthy...and green...',
-    price: 18.99,
-  },
-];
+const MEALS_URL = "https://food-order-app-1afc8-default-rtdb.europe-west1.firebasedatabase.app/mealsList.json"
 
 function AvailableMeals() {
-  const mealsList = DUMMY_MEALS.map((meal) =>
+  const [mealsArray, setMealsArray] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  async function fetchMeals() {
+    const response = await fetch(MEALS_URL)
+    const meals = await response.json()
+    setMealsArray(Object.keys(meals).map((key) => ({
+      id: key,
+      name: meals[key].name,
+      description: meals[key].description,
+      price: meals[key].price
+    })))
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    fetchMeals()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <section className={classes.meals}>
+        <Ring />
+      </section>
+    )
+  }
+
+  const mealsList = mealsArray.map((meal) =>
     <MealItem
       id={meal.id}
       key={meal.id}

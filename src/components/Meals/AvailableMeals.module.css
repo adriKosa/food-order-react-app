@@ -1,4 +1,6 @@
 .meals {
+  display: flex;
+  justify-content: center;
   max-width: 60rem;
   width: 90%;
   margin: 2rem auto;
