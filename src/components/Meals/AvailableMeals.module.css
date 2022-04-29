@@ -24,3 +24,8 @@
     transform: translateY(0);
   }
 }
+
+.error-message{
+  color: rgb(228, 28, 28);
+  font-weight: bold;
+}

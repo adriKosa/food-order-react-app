@@ -9,6 +9,7 @@ const MEALS_URL = "https://food-order-app-1afc8-default-rtdb.europe-west1.fireba
 function AvailableMeals() {
   const [mealsArray, setMealsArray] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   async function fetchMeals() {
     const response = await fetch(MEALS_URL)
@@ -23,16 +24,11 @@ function AvailableMeals() {
   }
 
   useEffect(() => {
-    fetchMeals()
+    fetchMeals().catch((error) => {
+      setIsLoading(false)
+      setErrorMessage(error.message)
+    })
   }, [])
-
-  if (isLoading) {
-    return (
-      <section className={classes.meals}>
-        <Ring />
-      </section>
-    )
-  }
 
   const mealsList = mealsArray.map((meal) =>
     <MealItem
@@ -45,11 +41,17 @@ function AvailableMeals() {
 
   return (
     <section className={classes.meals}>
-      <Card>
-        <ul>
-          {mealsList}
-        </ul>
-      </Card>
+      {isLoading && <Ring />}
+
+      {errorMessage && <p className={classes["error-message"]}>Something went wrong...</p>}
+
+      {!isLoading && errorMessage === null &&
+        <Card>
+          <ul>
+            {mealsList}
+          </ul>
+        </Card>
+      }
     </section>
   )
 }
