@@ -25,11 +25,29 @@ const Checkout = (props) => {
     const enteredPostalCode = postalCodeInputRef.current.value.trim()
     const enteredCity = cityInputRef.current.value.trim()
 
+    const nameValidity = enteredName !== ''
+    const streetValidity = enteredStreet !== ''
+    const postalCodeValidity = enteredPostalCode.length === 5
+    const cityValidity = enteredCity !== ''
+
+    const formIsValid = nameValidity & streetValidity & postalCodeValidity & cityValidity
+
     setInputValidity({
-      name: enteredName !== '',
-      street: enteredStreet !== '',
-      postalCode: enteredPostalCode.length === 5,
-      city: enteredCity !== ''
+      name: nameValidity,
+      street: streetValidity,
+      postalCode: postalCodeValidity,
+      city: cityValidity
+    })
+
+    if (!formIsValid) {
+      return
+    }
+
+    props.onSubmit({
+      name: enteredName,
+      street: enteredStreet,
+      postalCode: enteredPostalCode,
+      city: enteredCity
     })
   }
 
@@ -54,7 +72,7 @@ const Checkout = (props) => {
       <div className={postalInputClasses}>
         <label htmlFor='postal'>Postal Code</label>
         <input type='text' id='postal' ref={postalCodeInputRef} />
-        {inputValidity.postalCode !== null && !inputValidity.postalCode && <p>Input is invalid!</p>}
+        {inputValidity.postalCode !== null && !inputValidity.postalCode && <p>Input is invalid! Postal code should has 5 numbers/characters.</p>}
       </div>
       <div className={cityInputClasses}>
         <label htmlFor='city'>City</label>
